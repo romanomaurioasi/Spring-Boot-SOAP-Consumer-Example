@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        name="SalaryDeclarationService"
+        targetNamespace="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationService"
+        xmlns:sds="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationService"
+        xmlns:sdst="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- state of standardisation:
+        publication: FINAL 2020-04-23
+        intern: release-5.0.0-20200423-Version5_RL-LDUeV20200220-ELMV5
+
+        SVN keywords
+        $Date:: 2020-04-23 20:34:50 +0200 (Do., 23 Apr 2020)    $: Date of last commit
+        $Revision:: 26561                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes"
+                       schemaLocation="SalaryDeclarationServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- sync -->
+    <wsdl:message name="GetResultFromDeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareSalaryResponse"/>
+    </wsdl:message>
+
+    <!-- async -->
+    <wsdl:message name="DeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:DeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:DeclareSalaryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareSalaryRequest">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareSalary"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareSalaryResponse">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareSalaryResponse"/>
+    </wsdl:message>
+
+    <!-- declare Month -->
+    <!-- async -->
+    <wsdl:message name="DeclareMonthTotalRequest">
+        <wsdl:part name="parameters" element="sdst:DeclareMonthTotal"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareMonthTotalResponse">
+        <wsdl:part name="parameters" element="sdst:DeclareMonthTotalResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareMonthTotalRequest">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareMonthTotal"/>
+    </wsdl:message>
+    <wsdl:message name="GetStatusFromDeclareMonthTotalResponse">
+        <wsdl:part name="parameters" element="sdst:GetStatusFromDeclareMonthTotalResponse"/>
+    </wsdl:message>
+    <!-- sync -->
+    <wsdl:message name="GetResultFromDeclareMonthTotalRequest">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareMonthTotal"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareMonthTotalResponse">
+        <wsdl:part name="parameters" element="sdst:GetResultFromDeclareMonthTotalResponse"/>
+    </wsdl:message>
+
+    <!-- DialogMessage -->
+    <wsdl:message name="GetDialogRequest">
+        <wsdl:part name="parameters" element="sdst:GetDialog"/>
+    </wsdl:message>
+    <wsdl:message name="GetDialogResponse">
+        <wsdl:part name="parameters" element="sdst:GetDialogResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ReplyDialogRequest">
+        <wsdl:part name="parameters" element="sdst:ReplyDialog"/>
+    </wsdl:message>
+    <wsdl:message name="ReplyDialogResponse">
+        <wsdl:part name="parameters" element="sdst:ReplyDialogResponse"/>
+    </wsdl:message>
+
+    <!-- Interface Check -->
+    <wsdl:message name="PingRequest">
+        <wsdl:part name="parameters" element="sdst:Ping"/>
+    </wsdl:message>
+    <wsdl:message name="PingResponse">
+        <wsdl:part name="parameters" element="sdst:PingResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityRequest">
+        <wsdl:part name="parameters" element="sdst:CheckInteroperability"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityResponse">
+        <wsdl:part name="parameters" element="sdst:CheckInteroperabilityResponse"/>
+    </wsdl:message>
+
+    <!-- sync/async -->
+    <wsdl:message name="SalaryDeclarationFault">
+        <wsdl:part name="parameters" element="sdst:SalaryDeclarationFault"/>
+    </wsdl:message>
+
+    <wsdl:portType name="SalaryDeclarationPort">
+        <wsdl:operation name="DeclareSalary">
+            <wsdl:input message="sds:DeclareSalaryRequest"/>
+            <wsdl:output message="sds:DeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareSalary">
+            <wsdl:input message="sds:GetStatusFromDeclareSalaryRequest"/>
+            <wsdl:output message="sds:GetStatusFromDeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalary">
+            <wsdl:input message="sds:GetResultFromDeclareSalaryRequest"/>
+            <wsdl:output message="sds:GetResultFromDeclareSalaryResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="DeclareMonthTotal">
+            <wsdl:input message="sds:DeclareMonthTotalRequest"/>
+            <wsdl:output message="sds:DeclareMonthTotalResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareMonthTotal">
+            <wsdl:input message="sds:GetStatusFromDeclareMonthTotalRequest"/>
+            <wsdl:output message="sds:GetStatusFromDeclareMonthTotalResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareMonthTotal">
+            <wsdl:input message="sds:GetResultFromDeclareMonthTotalRequest"/>
+            <wsdl:output message="sds:GetResultFromDeclareMonthTotalResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetDialog">
+            <wsdl:input message="sds:GetDialogRequest"/>
+            <wsdl:output message="sds:GetDialogResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="ReplyDialog">
+            <wsdl:input message="sds:ReplyDialogRequest"/>
+            <wsdl:output message="sds:ReplyDialogResponse"/>
+            <wsdl:fault name="SalaryDeclarationFault" message="sds:SalaryDeclarationFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="Ping">
+            <wsdl:input message="sds:PingRequest"/>
+            <wsdl:output message="sds:PingResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <wsdl:input message="sds:CheckInteroperabilityRequest"/>
+            <wsdl:output message="sds:CheckInteroperabilityResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="SalaryDeclarationSOAPBinding" type="sds:SalaryDeclarationPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalary">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="DeclareMonthTotal">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusFromDeclareMonthTotal">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareMonthTotal">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetDialog">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="ReplyDialog">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationFault">
+                <soap:fault name="SalaryDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="Ping">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SalaryDeclarationService">
+        <wsdl:port name="SalaryDeclaration" binding="sds:SalaryDeclarationSOAPBinding">
+            <soap:address
+                    location="https://tst.itserve.ch/itserve/lohnstandard/stable/distributor/20200220-0.0/SalaryDeclarationService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

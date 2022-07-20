@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 1996-2020 itServe AG. All rights reserved.
+
+    This software is the proprietary information of itServe AG
+    Bern Switzerland. Use is subject to license terms.
+
+-->
+<sdst:DeclareMonthTotal xmlns:sdst="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes"
+ xmlns:sd="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclaration"
+ xmlns:sdc="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationContainer"
+ xmlns:c="http://www.swissdec.ch/schema/common/20200220/Common"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationServiceTypes file:/C:/projects/swissdec/schemas/sd/trunk/wsdl/SalaryDeclarationServiceTypes.xsd">
+    <sdc:RequestContext>
+        <c:UserAgent>
+            <c:Producer>Swissdec TransmitterSample .NET</c:Producer>
+            <c:Name>Swissdec</c:Name>
+            <c:Version>2020.05</c:Version>
+            <c:StandardVersion>5.0</c:StandardVersion>
+            <c:Certificate>9999.99</c:Certificate>
+        </c:UserAgent>
+        <c:CompanyName>
+            <c:HR-RC-Name>ICHAGCompany</c:HR-RC-Name>
+        </c:CompanyName>
+        <c:TransmissionDate>2020-02-20T20:20:02.0</c:TransmissionDate>
+        <c:RequestID>RequestID0</c:RequestID>
+        <c:LanguageCode>de</c:LanguageCode>
+    </sdc:RequestContext>
+    <sdc:JobMonthTotal>
+        <sdc:Addressees>
+            <sdc:AHV-AVS institutionIDRef="#AHV">
+                <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+            </sdc:AHV-AVS>
+            <sdc:FAK-CAF institutionIDRef="#FAK">
+                <sdc:ProcessByDistributor>true</sdc:ProcessByDistributor>
+            </sdc:FAK-CAF>
+        </sdc:Addressees>
+    </sdc:JobMonthTotal>
+    <sdc:MonthTotalDeclaration schemaVersion="0.0">
+        <sd:Company>
+            <sd:CompanyDescription>
+                <c:Name>
+                    <c:HR-RC-Name>ICHAG</c:HR-RC-Name>
+                </c:Name>
+                <c:Address>
+                    <c:Street>Länggassstrasse 26</c:Street>
+                    <c:Postbox>690</c:Postbox>
+                    <c:ZIP-Code>3000</c:ZIP-Code>
+                    <c:City>Bern 9</c:City>
+                </c:Address>
+                <c:UID-BFS>
+                    <c:UID>CHE-123.456.789</c:UID>
+                </c:UID-BFS>
+            </sd:CompanyDescription>
+            <sd:Institutions>
+                <sd:AHV-AVS institutionID="#AHV">
+                    <sd:AK-CC-BranchNumber>003.000</sd:AK-CC-BranchNumber>
+                    <sd:AK-CC-CustomerNumber>123456</sd:AK-CC-CustomerNumber>
+                </sd:AHV-AVS>
+                <sd:FAK-CAF institutionID="#FAK">
+                    <sd:FAK-CAF-BranchNumber>005.000</sd:FAK-CAF-BranchNumber>
+                    <sd:FAK-CAF-CustomerNumber>123456</sd:FAK-CAF-CustomerNumber>
+                </sd:FAK-CAF>
+            </sd:Institutions>
+            <sd:MonthTotals>
+                <sd:AHV-AVS-MonthTotal institutionIDRef="#AHV">
+                    <sd:Total-AHV-AVS-Incomes>100000.00</sd:Total-AHV-AVS-Incomes>
+                    <sd:Total-AHV-AVS-Open>101000.00</sd:Total-AHV-AVS-Open>
+                    <sd:Total-ALV-AC-Incomes>1000.00</sd:Total-ALV-AC-Incomes>
+                    <sd:Total-ALVZ-ACS-Incomes>100.00</sd:Total-ALVZ-ACS-Incomes>
+                    <sd:Total-ALV-AC-Open>200.00</sd:Total-ALV-AC-Open>
+                    <sd:Total-FLG-LFA-Incomes>10000.00</sd:Total-FLG-LFA-Incomes>
+                    <sd:Total-FLG-LFA-FamilyIncome-Supplement>20000.00</sd:Total-FLG-LFA-FamilyIncome-Supplement>
+                    <sd:Month>2019-10</sd:Month>
+                </sd:AHV-AVS-MonthTotal>
+                <sd:FAK-CAF-MonthTotal institutionIDRef="#FAK">
+                    <sd:Total-FAK-CAF-PerCanton>
+                        <sd:Total-FAK-CAF-ContributorySalary>1000.00</sd:Total-FAK-CAF-ContributorySalary>
+                        <sd:Total-FAK-CAF-FamilyIncomeSupplement>100.00</sd:Total-FAK-CAF-FamilyIncomeSupplement>
+                        <sd:Canton>BE</sd:Canton>
+                    </sd:Total-FAK-CAF-PerCanton>
+                    <sd:Total-FAK-CAF-PerCanton>
+                        <sd:Total-FAK-CAF-ContributorySalary>2000.00</sd:Total-FAK-CAF-ContributorySalary>
+                        <sd:Total-FAK-CAF-FamilyIncomeSupplement>200.00</sd:Total-FAK-CAF-FamilyIncomeSupplement>
+                        <sd:Canton>FR</sd:Canton>
+                    </sd:Total-FAK-CAF-PerCanton>
+                    <sd:Month>2019-10</sd:Month>
+                </sd:FAK-CAF-MonthTotal>
+            </sd:MonthTotals>
+        </sd:Company>
+    </sdc:MonthTotalDeclaration>
+</sdst:DeclareMonthTotal>

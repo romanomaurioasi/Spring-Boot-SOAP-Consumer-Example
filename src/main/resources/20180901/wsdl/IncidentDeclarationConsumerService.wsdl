@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        name="IncidentDeclarationConsumerService"
+        targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerService"
+        xmlns:idcs="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerService"
+        xmlns:idcst="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerServiceTypes"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerServiceTypes"
+                       schemaLocation="IncidentDeclarationConsumerServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="DeclareIncidentConsumerRequest">
+        <wsdl:part name="parameters" element="idcst:DeclareIncidentConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareIncidentConsumerResponse">
+        <wsdl:part name="parameters" element="idcst:DeclareIncidentConsumerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeIncidentConsumerRequest">
+        <wsdl:part name="parameters" element="idcst:SynchronizeIncidentConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeIncidentConsumerResponse">
+        <wsdl:part name="parameters" element="idcst:SynchronizeIncidentConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="PingConsumerRequest">
+        <wsdl:part name="parameters" element="idcst:PingConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="PingConsumerResponse">
+        <wsdl:part name="parameters" element="idcst:PingConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="IncidentDeclarationConsumerFault">
+        <wsdl:part name="parameters" element="idcst:IncidentDeclarationConsumerFault"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IncidentDeclarationConsumerPort">
+        <wsdl:operation name="DeclareIncidentConsumer">
+            <wsdl:input message="idcs:DeclareIncidentConsumerRequest"/>
+            <wsdl:output message="idcs:DeclareIncidentConsumerResponse"/>
+            <wsdl:fault name="IncidentDeclarationConsumerFault" message="idcs:IncidentDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeIncidentConsumer">
+            <wsdl:input message="idcs:SynchronizeIncidentConsumerRequest"/>
+            <wsdl:output message="idcs:SynchronizeIncidentConsumerResponse"/>
+            <wsdl:fault name="IncidentDeclarationConsumerFault" message="idcs:IncidentDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="PingConsumer">
+            <wsdl:input message="idcs:PingConsumerRequest"/>
+            <wsdl:output message="idcs:PingConsumerResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="IncidentDeclarationConsumerSOAPBinding" type="idcs:IncidentDeclarationConsumerPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareIncidentConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="IncidentDeclarationConsumerFault">
+                <soap:fault name="IncidentDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeIncidentConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="IncidentDeclarationConsumerFault">
+                <soap:fault name="IncidentDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="PingConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="IncidentDeclarationConsumerService">
+        <wsdl:port name="IncidentDeclarationConsumer" binding="idcs:IncidentDeclarationConsumerSOAPBinding">
+            <soap:address
+                    location="https://localhost/IncidentDeclarationConsumerService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 1996-2017 swissdec & itServe AG. All rights reserved.
+    This software is the proprietary information of itServe AG as implementor for swissdec.
+    Use is subject to license terms.
+
+-->
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerContainer"
+        xmlns:oacc="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerContainer"
+        xmlns:oac="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationContainer"
+        xmlns:oa="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthentication"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        attributeFormDefault="unqualified" version="0.0">
+
+    <!-- 31.07.2019  author: itServe, bfh
+        intern: final-1.0.0 // FINAL
+        business-view  = OK
+        technical-view = final
+        SVN keywords
+        $Date:: 2020-06-12 14:42:58 +0200 (Fr., 12 Jun 2020)    $: Date of last commit
+        $Revision:: 26766                                       $: Revision of last commit
+        $Author:: flueckiger                                    $: Author of last commit
+
+    -->
+
+    <xs:import namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+               schemaLocation="Common.xsd"/>
+
+    <xs:import
+            namespace="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthentication"
+            schemaLocation="OrganizationAuthentication.xsd"/>
+
+    <xs:import
+            namespace="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationContainer"
+            schemaLocation="OrganizationAuthenticationContainer.xsd"/>
+
+    <!-- RegisterOrganizationConsumer -->
+    <xs:complexType name="RegisterOrganizationConsumerRequestType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestContext" type="oacc:DistributorRequestContextBaseType"/>
+            <xs:element name="CertificateRequest-ID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>ZertificatsanfrageID</translation>
+                        <description>
+                            <short>
+                                Die ZertificatsanfrageID wird vom Distributor vergeben und verwaltet.
+                                Damit lassen sich mehrere Prozess-Schritte "verknüpfen" und
+                                ergibt dadurch eine Fall- oder Supportnummer.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identification du message</translation>
+                        <description>
+                            <short>
+                                L'identification du message (CertificateRequest-ID) est donnée et administrée
+                                par le distibuteur. Avec "CertificateRequest-ID", plusieurs pas de processus
+                                peuvent être enchaîné. Il résulte un numéro de cas ou de support.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RegisterOrganization" type="oacc:RegisterOrganizationConsumerType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RegisterOrganizationConsumerType">
+        <xs:sequence>
+            <!-- Problem with MS dotnet generation; new Initial... -->
+            <xs:element name="RequestContext" type="oac:RequestContextType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsKontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="OrganizationRegistration" type="oa:OrganizationRegistrationBaseType"/>
+            <xs:element name="WithDelegate" type="c:EmptyType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RegisterOrganizationConsumerResponseType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseContext" type="oacc:ConsumerResponseContextType"/>
+            <xs:element name="CertificateRequest-ID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>ZertificatsanfrageID</translation>
+                        <description>
+                            <short>
+                                Die ZertificatsanfrageID wird vom Distributor vergeben und verwaltet.
+                                Damit lassen sich mehrere Prozess-Schritte "verknüpfen" und
+                                ergibt dadurch eine Fall- oder Supportnummer.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identification du message</translation>
+                        <description>
+                            <short>
+                                L'identification du message (CertificateRequest-ID) est donnée et administrée
+                                par le distibuteur. Avec "CertificateRequest-ID", plusieurs pas de processus
+                                peuvent être enchaîné. Il résulte un numéro de cas ou de support.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RegisterOrganisationConsumer" type="oac:RegisterOrganisationConsumerType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- GetResultFromOrganizationRegistrationConsumer -->
+    <xs:complexType name="GetResultFromOrganizationRegistrationConsumerRequestType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestContext" type="oacc:DistributorRequestContextBaseType"/>
+            <xs:element name="GetResultFromOrganizationRegistration"
+                        type="oacc:GetResultFromOrganizationRegistrationConsumerType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetResultFromOrganizationRegistrationConsumerType">
+        <xs:sequence>
+            <xs:element name="RequestContext" type="oac:RequestContextType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsKontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CertificateRequest-ID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>ZertificatsanfrageID</translation>
+                        <description>
+                            <short>
+                                Die ZertificatsanfrageID wird vom Distributor vergeben und verwaltet.
+                                Damit lassen sich mehrere Prozess-Schritte "verknüpfen" und
+                                ergibt dadurch eine Fall- oder Supportnummer.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identification du message</translation>
+                        <description>
+                            <short>
+                                L'identification du message (CertificateRequest-ID) est donnée et administrée
+                                par le distibuteur. Avec "CertificateRequest-ID", plusieurs pas de processus
+                                peuvent être enchaîné. Il résulte un numéro de cas ou de support.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Institution" type="oa:InstitutionsType"/>
+            <xs:element name="Credentials" type="oac:CredentialsType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetResultFromOrganizationRegistrationConsumerResponseType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseContext" type="oacc:ConsumerResponseContextType"/>
+            <xs:element name="CertificateRequest-ID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>ZertificatsanfrageID</translation>
+                        <description>
+                            <short>
+                                Die ZertificatsanfrageID wird vom Distributor vergeben und verwaltet.
+                                Damit lassen sich mehrere Prozess-Schritte "verknüpfen" und
+                                ergibt dadurch eine Fall- oder Supportnummer.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identification du message</translation>
+                        <description>
+                            <short>
+                                L'identification du message (CertificateRequest-ID) est donnée et administrée
+                                par le distibuteur. Avec "CertificateRequest-ID", plusieurs pas de processus
+                                peuvent être enchaîné. Il résulte un numéro de cas ou de support.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ConsumerResult" type="oac:ConsumerResultType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DistributorRequestContextBaseType">
+        <xs:sequence>
+            <xs:element name="UserAgent" type="c:UserAgentType"/>
+            <xs:element name="TransmissionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übertragungszeitpunkt</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Duplicate" type="oacc:DuplicateType" minOccurs="0"/>
+            <xs:element name="VersionMappingFrom" type="oacc:VersionMappingFromType" minOccurs="0"/>
+            <xs:element name="ProducerSecurityTokens" type="oacc:ProducerSecurityTokensType">
+                <xs:unique name="x509token">
+                    <xs:selector xpath="oacc:X509Certificate"/>
+                    <xs:field xpath="oacc:Usage"/>
+                    <xs:field xpath="oacc:DistinguishedNameOwner"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="ProducerResponseNotifications"
+                        type="oacc:ProducerResponseNotificationsType"/>
+            <xs:element name="ConsumerNotifications" type="oacc:ConsumerNotificationsType"
+                        minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DuplicateType">
+        <xs:sequence>
+            <xs:element name="Last" type="oacc:LastDistributorRequestIDType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LastDistributorRequestIDType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestID" type="c:IncidentCaseIDType"/>
+        </xs:sequence>
+        <xs:attribute name="incidentCaseIDMapRef" type="c:InstanceRefIDType" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="de">
+                    <translation>IncidentCaseID Abbildungs Referenz</translation>
+                    <description>
+                        <short>
+                            Hier wird die Referenz auf die entsprechende IncidentCaseID angegeben.
+                        </short>
+                    </description>
+                </xs:documentation>
+                <xs:documentation xml:lang="fr">
+                    <translation>Référence IncidentCaseID</translation>
+                    <description>
+                        <short>
+                            todo
+                        </short>
+                    </description>
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="SubstitutionMappingType">
+        <xs:sequence>
+            <xs:element name="MappedPredecessorDistributorRequestID" type="c:IDType"/>
+            <xs:element name="MappedPredecessorConsumerResponseID" type="c:IDType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProducerSecurityTokensType">
+        <xs:sequence>
+            <xs:element name="Timestamp" type="xs:dateTime" maxOccurs="unbounded"/>
+            <xs:element name="X509Certificate" type="oacc:X509CertificateType"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="X509CertificateType">
+        <xs:sequence>
+            <xs:element name="Usage" type="oacc:UsageType"/>
+            <xs:element name="DistinguishedNameOwner" type="xs:string"/>
+            <xs:element name="DistinguishedNameIssuer" type="xs:string"/>
+            <xs:element name="SecuredElement" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="UsageType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Signature"/>
+            <xs:enumeration value="QualifiedSignature"/>
+            <xs:enumeration value="Encryption"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ProducerResponseNotificationsType">
+        <xs:sequence>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen, die an den Producer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen, die an den Producer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConsumerNotificationsType">
+        <xs:sequence>
+            <xs:element name="Warning" type="oacc:ConsumerNotificationType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen, die an den Consumer geschickt werden</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="oacc:ConsumerNotificationType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen, die an den Consumer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsumerNotificationType">
+        <xs:sequence>
+            <xs:element name="Notification" type="oacc:NotificationType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotificationType">
+        <xs:sequence>
+            <xs:element name="DescriptionCode" type="c:DescriptionCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Code der Beschreibung</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschreibungstext</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="VersionMappingFromType">
+        <xs:sequence>
+            <xs:element name="WSDLNamespace" type="xs:anyURI"/>
+            <xs:element name="ServiceTypesNamespace" type="xs:anyURI"/>
+            <xs:element name="IncidentDeclarationMinorVersion" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="ConsumerResponseContextType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AntwortID</translation>
+                        <description>
+                            <short>ID der Antwort</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>AntwortID</translation>
+                        <description>
+                            <short>ID de la réponse</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DistributorRequestID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsID</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrganizationAuthenticationConsumerFaultType">
+        <xs:sequence>
+            <xs:element name="FaultContext" type="oac:FaultConsumerContextType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte d'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FaultState" type="c:FaultStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Status</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>État de l'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

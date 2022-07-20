@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 1996-2017 swissdec & itServe AG. All rights reserved.
+    This software is the proprietary information of itServe AG as implementor for swissdec.
+    Use is subject to license terms.
+
+-->
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerServiceTypes"
+        xmlns:oacst="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerServiceTypes"
+        xmlns:oacc="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerContainer"
+        xmlns:oac="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationContainer"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        attributeFormDefault="unqualified" version="0.0">
+
+    <!-- 31.07.2019  author: itServe, bfh
+        intern: final-1.0.0 // FINAL
+        business-view  = OK
+        technical-view = final
+        SVN keywords
+        $Date:: 2020-06-12 14:42:58 +0200 (Fr., 12 Jun 2020)    $: Date of last commit
+        $Revision:: 26766                                       $: Revision of last commit
+        $Author:: flueckiger                                    $: Author of last commit
+
+   -->
+
+    <xs:import
+            namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+            schemaLocation="Common.xsd"/>
+    <xs:import
+            namespace="http://www.swissdec.ch/schema/oa/20190301/OrganizationAuthenticationConsumerContainer"
+            schemaLocation="OrganizationAuthenticationConsumerContainer.xsd"/>
+
+    <!-- definitions PingConsumer -->
+    <xs:element name="PingConsumer" type="c:PingConsumerType"/>
+    <xs:element name="PingConsumerResponse" type="c:PingConsumerResponseType"/>
+
+
+    <!-- definitions RegisterOrganization -->
+    <xs:element name="RegisterOrganizationConsumer" type="oacc:RegisterOrganizationConsumerRequestType"/>
+    <xs:element name="RegisterOrganizationConsumerResponse" type="oacc:RegisterOrganizationConsumerResponseType"/>
+
+    <!-- definitions GetResultFromRegisterOrganization -->
+    <xs:element name="GetResultFromOrganizationRegistrationConsumer"
+                type="oacc:GetResultFromOrganizationRegistrationConsumerRequestType"/>
+    <xs:element name="GetResultFromOrganizationRegistrationConsumerResponse"
+                type="oacc:GetResultFromOrganizationRegistrationConsumerResponseType"/>
+
+
+    <!-- *********** -->
+    <!-- ** FAULT ** -->
+    <!-- *********** -->
+    <!-- definition OrganizationAuthenticationFault -->
+    <xs:element name="OrganizationAuthenticationConsumerFault" type="oacc:OrganizationAuthenticationConsumerFaultType">
+        <xs:annotation>
+            <xs:documentation>OrganizationAuthenticationFault</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

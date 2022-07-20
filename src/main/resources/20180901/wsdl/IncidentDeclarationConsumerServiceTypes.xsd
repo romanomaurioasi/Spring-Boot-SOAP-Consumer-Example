@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerServiceTypes"
+        xmlns:idcst="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerServiceTypes"
+        xmlns:idcc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerContainer"
+        xmlns:idc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+        xmlns:id="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified"
+        version="0.0">
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <xs:import namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+               schemaLocation="Common.xsd"/>
+    <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerContainer"
+               schemaLocation="IncidentDeclarationConsumerContainer.xsd"/>
+
+    <!-- definitions PingConsumer -->
+    <xs:element name="PingConsumer" type="c:PingConsumerType"/>
+    <xs:element name="PingConsumerResponse" type="c:PingConsumerResponseType"/>
+
+
+    <!-- ****************************** -->
+    <!-- *** DECLARE INCIDENT PROCESS *** -->
+    <!-- ****************************** -->
+    <!-- definitions DeclareIncidentConsumer -->
+    <!-- todo constraints ? -->
+    <xs:element name="DeclareIncidentConsumer" type="idcc:DeclareIncidentConsumerType">
+
+        <xs:unique name="IncidentCaseID-Key">
+            <xs:selector
+                    xpath="idcc:DistributorRequestContext/idcc:IncidentCaseID"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+
+        <xs:unique name="IncidentCaseIDMap-Key">
+            <xs:selector
+                    xpath="idcc:DistributorRequestContext/idcc:IncidentCaseID"/>
+            <xs:field xpath="@incidentCaseIDMap"/>
+        </xs:unique>
+        <xs:keyref name="ConsumerIncidentCaseIDMap-Ref" refer="idcst:IncidentCaseIDMap-Key">
+            <xs:selector
+                    xpath="idcc:DeclareIncident/idc:IncidentDeclaration/id:Company/id:Staff/id:Person/id:*"/>
+            <xs:field xpath="@incidentCaseIDMapRef"/>
+        </xs:keyref>
+
+    </xs:element>
+    <xs:element name="DeclareIncidentConsumerResponse" type="idcc:DeclareIncidentConsumerResponseType">
+    </xs:element>
+
+
+    <!-- ************************************ -->
+    <!-- *** SYNCHRONIZE STORIES PROCESS *** -->
+    <!-- ************************************ -->
+    <!-- definitions SynchronizeStories -->
+    <!-- todo constraints ? -->
+    <xs:element name="SynchronizeIncidentConsumer" type="idcc:SynchronizeIncidentConsumerType">
+    </xs:element>
+    <xs:element name="SynchronizeIncidentConsumerResponse" type="idcc:SynchronizeIncidentConsumerResponseType">
+    </xs:element>
+
+
+    <!-- *********** -->
+    <!-- ** FAULT ** -->
+    <!-- *********** -->
+    <!-- definition IncidentDeclarationFault -->
+    <xs:element name="IncidentDeclarationConsumerFault" type="idcc:IncidentDeclarationConsumerFaultType">
+        <xs:annotation>
+            <xs:documentation>IncidentDeclarationFault</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+</xs:schema>

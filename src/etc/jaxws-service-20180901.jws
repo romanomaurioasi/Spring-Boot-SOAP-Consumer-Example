@@ -1,0 +1,15 @@
+<!--
+
+    Copyright 1996-2020 itServe AG. All rights reserved.
+
+    This software is the proprietary information of itServe AG
+    Bern Switzerland. Use is subject to license terms.
+
+-->
+<jaxws:bindings
+        xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+        wsdlLocation="../main/resources/20180901/wsdl/IncidentDeclarationService.wsdl"
+        xmlns="http://java.sun.com/xml/ns/jaxws"
+        version="2.0">
+    <enableWrapperStyle>false</enableWrapperStyle>
+</jaxws:bindings>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="IncidentDeclarationService"
+                  targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationService"
+                  xmlns:ids="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationService"
+                  xmlns:idst="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationServiceTypes"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationServiceTypes"
+                       schemaLocation="IncidentDeclarationServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <!-- sync -->
+    <!-- wsdl-Generierung in .Net : parameters1 statt nur parameters -->
+    <wsdl:message name="DeclareIncidentRequest">
+        <wsdl:part name="parameters1" element="idst:DeclareIncident"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareIncidentResponse">
+        <wsdl:part name="parameters1" element="idst:DeclareIncidentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeIncidentRequest">
+        <wsdl:part name="parameters1" element="idst:SynchronizeIncident"/>
+    </wsdl:message>
+    <wsdl:message name="SynchronizeIncidentResponse">
+        <wsdl:part name="parameters1" element="idst:SynchronizeIncidentResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="PingRequest">
+        <wsdl:part name="parameters1" element="idst:Ping"/>
+    </wsdl:message>
+    <wsdl:message name="PingResponse">
+        <wsdl:part name="parameters1" element="idst:PingResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityRequest">
+        <wsdl:part name="parameters1" element="idst:CheckInteroperability"/>
+    </wsdl:message>
+    <wsdl:message name="CheckInteroperabilityResponse">
+        <wsdl:part name="parameters1" element="idst:CheckInteroperabilityResponse"/>
+    </wsdl:message>
+
+    <!-- sync/async -->
+    <wsdl:message name="IncidentDeclarationFault">
+        <wsdl:part name="parameters1" element="idst:IncidentDeclarationFault"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IncidentDeclarationPort">
+        <wsdl:operation name="DeclareIncident">
+            <wsdl:input message="ids:DeclareIncidentRequest"/>
+            <wsdl:output message="ids:DeclareIncidentResponse"/>
+            <wsdl:fault name="IncidentDeclarationFault" message="ids:IncidentDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeIncident">
+            <wsdl:input message="ids:SynchronizeIncidentRequest"/>
+            <wsdl:output message="ids:SynchronizeIncidentResponse"/>
+            <wsdl:fault name="IncidentDeclarationFault" message="ids:IncidentDeclarationFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="Ping">
+            <wsdl:input message="ids:PingRequest"/>
+            <wsdl:output message="ids:PingResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <wsdl:input message="ids:CheckInteroperabilityRequest"/>
+            <wsdl:output message="ids:CheckInteroperabilityResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="IncidentDeclarationSOAPBinding" type="ids:IncidentDeclarationPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareIncident">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="IncidentDeclarationFault">
+                <soap:fault name="IncidentDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SynchronizeIncident">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="IncidentDeclarationFault">
+                <soap:fault name="IncidentDeclarationFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="Ping">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CheckInteroperability">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="IncidentDeclarationService">
+        <wsdl:port name="IncidentDeclaration" binding="ids:IncidentDeclarationSOAPBinding">
+            <soap:address
+                    location="https://localhost/IncidentDeclarationService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+        xmlns:idc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+        xmlns:id="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.0">
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <xs:import namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+               schemaLocation="Common.xsd"/>
+    <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+               schemaLocation="IncidentDeclaration.xsd"/>
+
+
+    <!--  IncidentDeclarationRequest
+    -->
+    <xs:complexType name="DeclareIncidentRequestType">
+        <xs:sequence>
+            <xs:element name="RequestContext" type="idc:RequestContextType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsKontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Job" type="idc:JobType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Arbeitsauftrag</translation>
+                        <description>
+                            <short>
+                                Arbeitsauftrag für sämtliche Empfänger (Distributor und Institutionen)
+                            </short>
+                            <technical>
+                                Hier sind alle Empfänger aufgeführt
+                                - Distributor
+                                - Institutions-Empfänger der Domänen
+                                - carbon copy Treuhänder und Broker
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Commande</translation>
+                        <description>
+                            <short>
+                                Commande pour tous les receveurs (distributeur et institutions)
+                            </short>
+                            <technical>
+                                Liste de tous les receveurs
+                                - distributeur
+                                - receveurs des institutions des domaines
+                                - receveurs "carbon copy" : agents fiduciaires, courtiers
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IncidentDeclaration" type="id:IncidentDeclarationType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Ereignismeldung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Déclaration de l’événement</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RequestContextType">
+        <xs:sequence>
+            <xs:element name="UserAgent" type="c:UserAgentType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Applikationsinformation</translation>
+                        <description>
+                            <short>
+                                Beschreibung der wesentlichen System-Identifikations-Daten
+                            </short>
+                            <technical>
+                                Zur Qualitätsicherung des Übermittlungsprozesses werden die wesentlichen Informationen
+                                der beteiligten gesichert
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations concernant l'application</translation>
+                        <description>
+                            <short>
+                                Description des données essentielles d'identification de système
+                            </short>
+                            <technical>
+                                Pour l'assurance de la qualité, les informations essentielles des participants
+                                sont sauvegardées.
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CompanyName" type="c:CompanyNameType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Unternehmensdaten</translation>
+                        <description>
+                            <short>
+                                Beschreibung der wesentlichen Unternehmensdaten
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de l'entreprise</translation>
+                        <description>
+                            <short>
+                                Nom de l'entreprise
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TransmissionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übertragungszeitpunkt</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Date et Temps de transmission</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RequestID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsID</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="LanguageCode" type="c:LanguageCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Sprachcode</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Code de langage</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="MonitoringID" type="c:MonitoringIDType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>ÜberwachungsID</translation>
+                        <description>
+                            <short>
+                                ÜberwachungsID
+                            </short>
+                            <technical>
+                                Die ÜberwachungsID wird vorallem in der Referenzapplikation zur Aufteilung der Daten
+                                verwendet
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>ÜberwachungsID</translation>
+                        <description>
+                            <short>
+                                Identificateur de surveillance
+                            </short>
+                            <technical>
+                                L'identificateur de surveillance est surtout utilisé dans l'application de
+                                référence pour le classement des données.
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="JobType">
+        <xs:sequence>
+            <xs:element name="Addressees" type="idc:AddresseeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adressen</translation>
+                        <description>
+                            <short>
+                                Adressen der Empfänger
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresses</translation>
+                        <description>
+                            <short>
+                                Adresses des receveurs
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:unique name="InstitutionRefUVG-LAA-Ctrl">
+                    <xs:selector xpath="idc:UVG-LAA"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:unique>
+                <xs:unique name="InstitutionRefUVGZ-LAAC-Ctrl">
+                    <xs:selector xpath="idc:UVGZ-LAAC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:unique>
+                <xs:unique name="InstitutionRefKU-AC-Ctrl">
+                    <xs:selector xpath="idc:KU-AC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:unique>
+                <xs:unique name="InstitutionRefKTG-AMC-Ctrl">
+                    <xs:selector xpath="idc:KTG-AMC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="EndUserNotification" type="idc:UserNotificationType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Endbenutzer-Benachrichtigung</translation>
+                        <description>
+                            <short>
+                                Benachrichtigung des Endbenutzer mittels eMail über das Ende der Verteilung
+                                (Distributor)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Notification de l'utilisateur final</translation>
+                        <description>
+                            <short>
+                                Notification de l'utilisateur final par e-mail, quand la distribution est terminée
+                                (distributeur)
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddresseeType">
+        <xs:sequence>
+            <xs:element name="UVG-LAA" type="idc:ControlsType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution Steuerung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contrôle institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UVGZ-LAAC" type="idc:ControlsType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution Steuerung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contrôle institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KU-AC" type="idc:ControlsType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution Steuerung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contrôle institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KTG-AMC" type="idc:ControlsType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution Steuerung</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contrôle institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ControlsType">
+        <xs:sequence>
+            <xs:element name="ProcessByDistributor" type="c:SimpleBooleanType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Verteilung durch Distributor</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Distribution effectuée par le distributeur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="institutionIDRef" type="c:InstanceRefIDType" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="UserNotificationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>EndBenutzer Benachrichtigung</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Notification de l'utilisateur final</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Name</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="EmailAddress" type="c:EmailAddressType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Email Adresse</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse e-mail</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PhoneNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Telefonnummer</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Numéro de téléphone</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- IncidentDeclarationResponse
+    -->
+    <xs:complexType name="DeclareIncidentResponseType">
+        <xs:sequence>
+            <xs:element name="ResponseContext" type="idc:ContextBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Antwort-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la réponse</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Plausible" type="idc:PlausibleNotificationsType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Plausibilisiert</translation>
+                        <description>
+                            <short>
+                                Validierung und Plausibilisierung sind abgeschlossen
+                            </short>
+                            <technical>
+                                Die Meldung ist valid und plausibel
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>contrôle de plausibilité terminé avec succès</translation>
+                        <description>
+                            <short>
+                                Contrôle de validité et de plausibilité terminé avec succès
+                            </short>
+                            <technical>
+                                L'avis est valide et plausible
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContextBaseType">
+        <xs:sequence>
+            <xs:element name="UserAgent" type="c:UserAgentType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Applikationsinformation</translation>
+                        <description>
+                            <short>
+                                Beschreibung der wesentlichen System-Identifikations-Daten
+                            </short>
+                            <technical>
+                                Zur Qualitätsicherung des Übermittlungsprozesses werden die wesentlichen Informationen
+                                der beteiligten gesichert
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations concernant l'application</translation>
+                        <description>
+                            <short>
+                                Description des données essentielles d'identification de système
+                            </short>
+                            <technical>
+                                Pour l'assurance de la qualité, les informations essentielles des participants
+                                sont sauvegardées.
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InstitutionName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institutionsname</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de l'institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TransmissionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übertragungszeitpunkt</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Temps de transmission</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ResponseID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AntwortID</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de la réponse</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RequestID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsID</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContextConsumerBaseType">
+        <xs:sequence>
+            <xs:element name="UserAgent" type="c:UserAgentType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Applikationsinformation</translation>
+                        <description>
+                            <short>
+                                Beschreibung der wesentlichen System-Identifikations-Daten
+                            </short>
+                            <technical>
+                                Zur Qualitätsicherung des Übermittlungsprozesses werden die wesentlichen Informationen
+                                der beteiligten gesichert
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations concernant l'application</translation>
+                        <description>
+                            <short>
+                                Description des données essentielles d'identification de système
+                            </short>
+                            <technical>
+                                Pour l'assurance de la qualité, les informations essentielles des participants
+                                sont sauvegardées.
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InstitutionName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institutionsname</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Nom de l'institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="TransmissionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übertragungszeitpunkt</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Temps de transmission</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ResponseID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AntwortID</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de la réponse</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="RequestID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsID</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="PlausibleNotificationsType">
+        <xs:sequence>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Infromationen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Avertissements</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="JobState" type="idc:JobStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Arbeitsauftrags-Status</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>État de la commande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="JobStateType">
+        <xs:sequence>
+            <xs:element name="UVG-LAA" type="idc:WorkingStateType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UVGZ-LAAC" type="idc:WorkingStateType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KU-AC" type="idc:WorkingStateType" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KTG-AMC" type="idc:KTG-AMC-WorkingStateType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WorkingStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="Success" type="idc:IncidentStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Erfolgreich</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Succès</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ignored" type="c:EmptyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adresse ignoriert</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse ignorée</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Error" type="idc:ErrorResponseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>
+                            Verarbeitung ist fehlgeschlagen, da empfänger einen Fehler gemeldet hat
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>
+                            Traitement failli, causé par un problème du receveur
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+        <xs:attribute name="institutionIDRef" type="c:InstanceRefIDType" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="KTG-AMC-WorkingStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="Success" type="idc:KTG-AMC-IncidentStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Erfolgreich</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Succès</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ignored" type="c:EmptyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adresse ignoriert</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse ignorée</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Error" type="idc:ErrorResponseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>
+                            Verarbeitung ist fehlgeschlagen, da empfänger einen Fehler gemeldet hat
+                        </translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>
+                            Traitement failli, causé par un problème du receveur
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+        <xs:attribute name="institutionIDRef" type="c:InstanceRefIDType" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="IncidentStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="AddresseeContext" type="idc:ContextConsumerBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adress-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte du destinataire</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InstitutionAddress" type="c:NameAndAddressType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institutionsadresse</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse institutionnelle</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DigitalizationScope" type="idc:DigitalizationScopeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Digitalisierungsbereiche</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Domaines de numérisation</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Staff" type="id:AccidentStaffType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschäftigte</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Employés</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Avertissements</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="KTG-AMC-IncidentStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="AddresseeContext" type="idc:ContextConsumerBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Adress-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte du destinataire</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="InstitutionAddress" type="c:NameAndAddressType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institutionsadresse</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Adresse institutionnelle</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DigitalizationScope" type="idc:DigitalizationScopeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Digitalisierungsbereiche</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Domaines de numérisation</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Staff" type="id:KTG-AMC-StaffType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschäftigte</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Employés</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Avertissements</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="DigitalizationScopeType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="BasicCoverage"/>
+            <xs:enumeration value="BasicCoverageSettlement"/>
+            <xs:enumeration value="BasicDialog"/>
+            <xs:enumeration value="BasicCoverageDialog"/>
+            <xs:enumeration value="BasicCoverageSettlementDialog"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="IncidentDeclarationFaultType">
+        <xs:sequence>
+            <xs:element name="FaultContext" type="idc:ContextBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte d'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FaultState" type="c:FaultStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Status</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>État de l'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IncidentDeclarationConsumerFaultType">
+        <xs:sequence>
+            <xs:element name="FaultContext" type="idc:ContextConsumerBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte d'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FaultState" type="c:FaultStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Fehler-Status</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>État de l'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="ErrorResponseType">
+        <xs:annotation>
+            <xs:documentation>Info</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="EndUserInformation" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Endbenutzer-Information</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations pour l'utilisateur final</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DetailInformation" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>DetailInformation</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations détaillées</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="FaultInformation" type="idc:IncidentDeclarationFaultType"
+                        minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>FehlerInformation des Empfängers</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations du receveur concernant l'erreur</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- usage: IncidentDeclarationConsumerContainer -->
+    <xs:complexType name="ReducedWorkingStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="idc:WorkingStateType">
+                <xs:choice>
+                    <xs:element name="Success" type="idc:IncidentStateType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de">
+                                <translation>Erfolgreich</translation>
+                            </xs:documentation>
+                            <xs:documentation xml:lang="fr">
+                                <translation>Succès</translation>
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Reduced-KTG-AMC-WorkingStateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="de">
+                <translation>Arbeitszustandsdetails</translation>
+            </xs:documentation>
+            <xs:documentation xml:lang="fr">
+                <translation>Avancement du travail</translation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="idc:KTG-AMC-WorkingStateType">
+                <xs:choice>
+                    <xs:element name="Success" type="idc:KTG-AMC-IncidentStateType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de">
+                                <translation>Erfolgreich</translation>
+                            </xs:documentation>
+                            <xs:documentation xml:lang="fr">
+                                <translation>Succès</translation>
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- end
+    IncidentDeclaration -->
+
+
+    <!-- SynchronizeIncident
+    -->
+    <xs:complexType name="SynchronizeIncidentRequestType">
+        <xs:sequence>
+            <xs:element name="RequestContext" type="idc:RequestContextType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsKontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la demande</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Company" type="id:CompanyUIDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Unternehmen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Entreprise</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Institution" type="idc:InstitutionIdentificationType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Institution</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IncidentStories" type="id:IncidentStoriesRequestType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:unique name="StoryID-Ctrl">
+                    <xs:selector xpath="id:*"/>
+                    <xs:field xpath="id:StoryID"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="StoriesWithoutDeclaration" type="id:StoriesWithoutDeclarationType"
+                        minOccurs="0">
+                <xs:unique name="WithoutDeclarationStoryID-Ctrl">
+                    <xs:selector xpath="id:*"/>
+                    <xs:field xpath="id:StoryID"/>
+                </xs:unique>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InstitutionIdentificationType">
+        <xs:sequence>
+            <xs:element name="InsuranceID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Versicherungsidentifikation</translation>
+                        <description>
+                            <short>Versicherungsidentifikation gemäss seperater Liste</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur d'assurance</translation>
+                        <description>
+                            <short>Identificateur d'assurance selon liste séparée</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Domain" type="idc:DomainType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Domäne</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Domaine</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CustomerIdentity" type="c:NotEmptyStringType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Versicherungs Kunden Identifikation</translation>
+                        <description>
+                            <short>
+                                Von der Versicherung zugeteilte Kunden-Identifikation, die zur eindeutigen
+                                Identifikation des Betriebes
+                                (der Unternehmen) dient.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur du client de l'assurance</translation>
+                        <description>
+                            <short>
+                                Numéro de client attribué par l'assurance, qui sert à l'identification unique de
+                                l'entreprise.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ContractIdentity" type="c:NotEmptyStringType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Vertragsidentifikation</translation>
+                        <description>
+                            <short>Von der Versicherung zugeteilte Vertrags-Identifikation.
+                            </short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Identificateur de contrat</translation>
+                        <description>
+                            <short>Identificateur de contrat attribuée par l'assurance.</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="DomainType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="UVG-LAA"/>
+            <xs:enumeration value="UVGZ-LAAC"/>
+            <xs:enumeration value="KU-AC"/>
+            <xs:enumeration value="KTG-AMC"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="SynchronizeIncidentConsumerType">
+        <xs:sequence>
+            <xs:element name="AddresseeContext" type="idc:ContextConsumerBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Antwort-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la réponse</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Institution" type="idc:InstitutionIdentificationType"/>
+            <xs:element name="DigitalizationScope" type="idc:DigitalizationScopeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Digitalisierungsbereiche</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Domaines de numérisation</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IncidentStories" type="id:IncidentStoriesResponseType" minOccurs="0"
+                        maxOccurs="unbounded">
+                <xs:unique name="ConsumerStoryID-Ctrl">
+                    <xs:selector xpath="id:*"/>
+                    <xs:field xpath="id:StoryID"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="StoriesWithoutDeclaration" type="id:StoriesWithoutDeclarationType"
+                        minOccurs="0">
+                <xs:unique name="WithoutDeclarationConsumerStoryID-Ctrl">
+                    <xs:selector xpath="id:*"/>
+                    <xs:field xpath="id:StoryID"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="Available" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="IncidentCaseID" type="c:IDType" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Infromationen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Informations</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Avertissements</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SynchronizeIncidentResponseType">
+        <xs:sequence>
+            <xs:element name="ResponseContext" type="idc:ContextBaseType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Antwort-Kontext</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>Contexte de la réponse</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SynchronizeIncidentConsumer" type="idc:SynchronizeIncidentConsumerType">
+                <xs:unique name="ConsumerIncidentContextID-Ctrl">
+                    <xs:selector xpath="idc:IncidentStories/id:IncidentContext"/>
+                    <xs:field xpath="id:CompanyCaseID"/>
+                    <xs:field xpath="id:InsuranceCaseID"/>
+                    <xs:field xpath="id:IncidentCaseID"/>
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- end
+    SynchronizeIncident -->
+
+</xs:schema>

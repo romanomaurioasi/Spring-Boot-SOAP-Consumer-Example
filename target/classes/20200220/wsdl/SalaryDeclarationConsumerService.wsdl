@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions name="SalaryDeclarationConsumerService"
+                  targetNamespace="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationConsumerService"
+                  xmlns:sdcs="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationConsumerService"
+                  xmlns:sdcst="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationConsumerServiceTypes"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- state of standardisation:
+        publication: FINAL 2020-04-23
+        intern: release-5.0.0-20200423-Version5_RL-LDUeV20200220-ELMV5
+
+        SVN keywords
+        $Date:: 2020-04-23 20:34:50 +0200 (Do., 23 Apr 2020)    $: Date of last commit
+        $Revision:: 26561                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import
+                    namespace="http://www.swissdec.ch/schema/sd/20200220/SalaryDeclarationConsumerServiceTypes"
+                    schemaLocation="SalaryDeclarationConsumerServiceTypes.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="SalaryDeclarationConsumerFault">
+        <wsdl:part name="parameters" element="sdcst:SalaryDeclarationConsumerFault"/>
+    </wsdl:message>
+
+    <wsdl:message name="DeclareSalaryConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:DeclareSalaryConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareSalaryConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:DeclareSalaryConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetResultFromDeclareSalaryConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareSalaryConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareSalaryConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareSalaryConsumerResponse"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="DeclareMonthTotalConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:DeclareMonthTotalConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="DeclareMonthTotalConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:DeclareMonthTotalConsumerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareMonthTotalConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareMonthTotalConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="GetResultFromDeclareMonthTotalConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:GetResultFromDeclareMonthTotalConsumerResponse"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="GetDialogConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:GetDialogConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="GetDialogConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:GetDialogConsumerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ReplyDialogConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:ReplyDialogConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="ReplyDialogConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:ReplyDialogConsumerResponse"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="PingConsumerRequest">
+        <wsdl:part name="parameters" element="sdcst:PingConsumer"/>
+    </wsdl:message>
+    <wsdl:message name="PingConsumerResponse">
+        <wsdl:part name="parameters" element="sdcst:PingConsumerResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="SalaryDeclarationConsumerPort">
+        <wsdl:operation name="DeclareSalaryConsumer">
+            <wsdl:input message="sdcs:DeclareSalaryConsumerRequest"/>
+            <wsdl:output message="sdcs:DeclareSalaryConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault"
+                        message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalaryConsumer">
+            <wsdl:input message="sdcs:GetResultFromDeclareSalaryConsumerRequest"/>
+            <wsdl:output message="sdcs:GetResultFromDeclareSalaryConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="DeclareMonthTotalConsumer">
+            <wsdl:input message="sdcs:DeclareMonthTotalConsumerRequest"/>
+            <wsdl:output message="sdcs:DeclareMonthTotalConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareMonthTotalConsumer">
+            <wsdl:input message="sdcs:GetResultFromDeclareMonthTotalConsumerRequest"/>
+            <wsdl:output message="sdcs:GetResultFromDeclareMonthTotalConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetDialogConsumer">
+            <wsdl:input message="sdcs:GetDialogConsumerRequest"/>
+            <wsdl:output message="sdcs:GetDialogConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="ReplyDialogConsumer">
+            <wsdl:input message="sdcs:ReplyDialogConsumerRequest"/>
+            <wsdl:output message="sdcs:ReplyDialogConsumerResponse"/>
+            <wsdl:fault name="SalaryDeclarationConsumerFault" message="sdcs:SalaryDeclarationConsumerFault"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="PingConsumer">
+            <wsdl:input message="sdcs:PingConsumerRequest"/>
+            <wsdl:output message="sdcs:PingConsumerResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="SalaryDeclarationConsumerSOAPBinding"
+                  type="sdcs:SalaryDeclarationConsumerPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="DeclareSalaryConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareSalaryConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="DeclareMonthTotalConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetResultFromDeclareMonthTotalConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetDialogConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="ReplyDialogConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SalaryDeclarationConsumerFault">
+                <soap:fault name="SalaryDeclarationConsumerFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="PingConsumer">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SalaryDeclarationConsumerService">
+        <wsdl:port name="SalaryDeclarationConsumer"
+                   binding="sdcs:SalaryDeclarationConsumerSOAPBinding">
+            <soap:address location="https://tst.xxx.ch/services/SalaryDeclaration"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

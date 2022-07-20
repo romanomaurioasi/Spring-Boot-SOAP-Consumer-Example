@@ -1,0 +1,69 @@
+
+package ch.swissdec.schema.sd._20130514.salarydeclaration;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Classe Java per BVG-LPP-CodeDescriptionsType complex type.
+ * 
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * 
+ * <pre>
+ * &lt;complexType name="BVG-LPP-CodeDescriptionsType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="CodeDescription" type="{http://www.swissdec.ch/schema/sd/20130514/SalaryDeclaration}BVG-LPP-CodeDescriptionType" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "BVG-LPP-CodeDescriptionsType", propOrder = {
+    "codeDescription"
+})
+public class BVGLPPCodeDescriptionsType {
+
+    @XmlElement(name = "CodeDescription", required = true)
+    protected List<BVGLPPCodeDescriptionType> codeDescription;
+
+    /**
+     * Gets the value of the codeDescription property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the codeDescription property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCodeDescription().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link BVGLPPCodeDescriptionType }
+     * 
+     * 
+     */
+    public List<BVGLPPCodeDescriptionType> getCodeDescription() {
+        if (codeDescription == null) {
+            codeDescription = new ArrayList<BVGLPPCodeDescriptionType>();
+        }
+        return this.codeDescription;
+    }
+
+}

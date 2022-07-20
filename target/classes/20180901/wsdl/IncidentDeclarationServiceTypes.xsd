@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationServiceTypes"
+        xmlns:idst="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationServiceTypes"
+        xmlns:idc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+        xmlns:id="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+        attributeFormDefault="unqualified" version="0.0">
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <xs:import namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+               schemaLocation="Common.xsd"/>
+    <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+               schemaLocation="IncidentDeclarationContainer.xsd"/>
+
+    <!-- definitions Ping -->
+    <xs:element name="Ping" type="c:PingType"/>
+    <xs:element name="PingResponse" type="c:PingResponseType"/>
+
+    <!-- definitions CheckInteroperability -->
+    <xs:element name="CheckInteroperability" type="c:CheckInteroperabilityType"/>
+    <xs:element name="CheckInteroperabilityResponse" type="c:CheckInteroperabilityResponseType"/>
+
+    <!-- ****************************** -->
+    <!-- *** DECLARE INCIDENT PROCESS *** -->
+    <!-- ****************************** -->
+    <!-- definitions DeclareIncident -->
+    <xs:element name="DeclareIncident" type="idc:DeclareIncidentRequestType">
+        <xs:unique name="UVG-LAA-ID-Key">
+            <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:UVG-LAA"/>
+            <xs:field xpath="@institutionID"/>
+        </xs:unique>
+        <xs:keyref name="UVG-LAA-ID-Ref" refer="idst:UVG-LAA-ID-Key">
+            <xs:selector xpath="idc:Job/idc:Addressees/idc:UVG-LAA"/>
+            <xs:field xpath="@institutionIDRef"/>
+        </xs:keyref>
+        <xs:unique name="UVGZ-LAAC-ID-Key">
+            <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:UVGZ-LAAC"/>
+            <xs:field xpath="@institutionID"/>
+        </xs:unique>
+        <xs:keyref name="UVGZ-LAAC-ID-Ref" refer="idst:UVGZ-LAAC-ID-Key">
+            <xs:selector xpath="idc:Job/idc:Addressees/idc:UVGZ-LAAC"/>
+            <xs:field xpath="@institutionIDRef"/>
+        </xs:keyref>
+        <xs:unique name="KU-AC-ID-Key">
+            <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:KU-AC"/>
+            <xs:field xpath="@institutionID"/>
+        </xs:unique>
+        <xs:keyref name="KU-AC-ID-Ref" refer="idst:KU-AC-ID-Key">
+            <xs:selector xpath="idc:Job/idc:Addressees/idc:KU-AC"/>
+            <xs:field xpath="@institutionIDRef"/>
+        </xs:keyref>
+        <xs:unique name="KTG-AMC-ID-Key">
+            <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:KTG-AMC"/>
+            <xs:field xpath="@institutionID"/>
+        </xs:unique>
+        <xs:keyref name="KTG-AMC-ID-Ref" refer="idst:KTG-AMC-ID-Key">
+            <xs:selector xpath="idc:Job/idc:Addressees/idc:KTG-AMC"/>
+            <xs:field xpath="@institutionIDRef"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="DeclareIncidentResponse" type="idc:DeclareIncidentResponseType"/>
+
+
+    <!-- ************************************ -->
+    <!-- *** SYNCHRONIZE STORIES PROCESS *** -->
+    <!-- ************************************ -->
+    <!-- definitions SynchronizeStories -->
+    <!-- todo constraints ? -->
+    <xs:element name="SynchronizeIncident" type="idc:SynchronizeIncidentRequestType">
+        <xs:unique name="IncidentContextID-Ctrl">
+            <xs:selector xpath="idc:IncidentStories/id:IncidentContext"/>
+            <xs:field xpath="id:CompanyCaseID"/>
+            <xs:field xpath="id:InsuranceCaseID"/>
+            <xs:field xpath="id:IncidentCaseID"/>
+        </xs:unique>
+    </xs:element>
+    <xs:element name="SynchronizeIncidentResponse" type="idc:SynchronizeIncidentResponseType">
+    </xs:element>
+
+
+    <!-- *********** -->
+    <!-- ** FAULT ** -->
+    <!-- *********** -->
+    <!-- definition IncidentDeclarationFault -->
+    <xs:element name="IncidentDeclarationFault" type="idc:IncidentDeclarationFaultType">
+        <xs:annotation>
+            <xs:documentation>IncidentDeclarationFault</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+</xs:schema>

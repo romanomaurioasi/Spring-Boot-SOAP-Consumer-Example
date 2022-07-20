@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        targetNamespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerContainer"
+        xmlns:idcc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationConsumerContainer"
+        xmlns:idc="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+        xmlns:id="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+        xmlns:c="http://www.swissdec.ch/schema/common/20180901/Common"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.0">
+
+
+    <!-- state of standardisation: FINAL
+        intern: release 1.0.0
+        publication: 2018-09-25
+
+        SVN keywords
+        $Date:: 2018-09-26 01:53:57 +0200 (Mi., 26 Sep 2018)    $: Date of last commit
+        $Revision:: 24024                                       $: Revision of last commit
+        $Author:: boehm                                         $: Author of last commit
+
+    -->
+
+
+    <xs:import namespace="http://www.swissdec.ch/schema/common/20180901/Common"
+               schemaLocation="Common.xsd"/>
+    <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclarationContainer"
+               schemaLocation="IncidentDeclarationContainer.xsd"/>
+    <xs:import namespace="http://www.swissdec.ch/schema/id/20180901/IncidentDeclaration"
+               schemaLocation="IncidentDeclaration.xsd"/>
+
+    <xs:complexType name="DistributorRequestContextBaseType">
+        <xs:sequence>
+            <xs:element name="UserAgent" type="c:UserAgentType"/>
+            <xs:element name="TransmissionDate" type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Übertragungszeitpunkt</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DistributorRequestID" type="c:IDType"/>
+            <xs:element name="Duplicate" type="idcc:DuplicateType" minOccurs="0"/>
+            <xs:element name="VersionMappingFrom" type="idcc:VersionMappingFromType" minOccurs="0"/>
+            <xs:element name="ProducerSecurityTokens" type="idcc:ProducerSecurityTokensType">
+                <xs:unique name="X509CertificateID">
+                    <xs:selector xpath="idcc:X509Certificate"/>
+                    <xs:field xpath="@X509CertificateID"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="SignatureCertificateUID-BFS" type="idcc:SignatureCertificateUID-BFSType" minOccurs="0"/>
+            <xs:element name="ProducerResponseNotifications"
+                        type="idcc:ProducerResponseNotificationsType"/>
+            <xs:element name="ConsumerNotifications" type="idcc:ConsumerNotificationsType" minOccurs="0"/>
+            <xs:element name="Institutions" type="id:CustomerIdentificationType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SignatureCertificateUID-BFSType">
+        <xs:sequence>
+            <xs:element name="CommonName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Common Name</translation>
+                        <description>
+                            <short/>
+                            <domain/>
+                            <technical>
+                                NTRCH-{UID-BFS}@swissdec.ch
+                                mit Beispiel:
+                                NTRCH-CHE-123.456.789@swissdec.ch
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>fr... todo</translation>
+                        <description>
+                            <short/>
+                            <domain/>
+                            <technical>
+                                NTRCH-{UID-BFS}@swissdec.ch
+                                mit Beispiel:
+                                NTRCH-CHE-123.456.789@swissdec.ch
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>all, UVG-, UVGZ, KU-, KTG</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UID" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>UID</translation>
+                        <description>
+                            <short/>
+                            <domain/>
+                            <technical>
+                                UID Nr. nach BFS UID-Register
+                                OID Object Identifier (2.5.4.97)
+                                mit Beispiel
+                                NTRCH-CHE-123.456.789
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>UID</translation>
+                        <description>
+                            <short/>
+                            <domain/>
+                            <technical>
+                                UID Nr. nach BFS UID-Register
+                                OID Object Identifier (2.5.4.97)
+                                mit Beispiel
+                                NTRCH-CHE-123.456.789
+                            </technical>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <usage>all, UVG-, UVGZ, KU-, KTG</usage>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="X509CertificateIDRef" type="c:InstanceRefIDType" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="DistributorRequestContextType">
+        <xs:complexContent>
+            <xs:extension base="idcc:DistributorRequestContextBaseType">
+                <xs:sequence>
+                    <xs:element name="IncidentCaseID" type="c:IncidentCaseIDWithMapType" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="DuplicateType">
+        <xs:sequence>
+            <xs:element name="Last" type="idcc:LastDistributorRequestIDType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LastDistributorRequestIDType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestID" type="c:IncidentCaseIDType"/>
+        </xs:sequence>
+        <xs:attribute name="incidentCaseIDMapRef" type="c:InstanceRefIDType" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="de">
+                    <translation>IncidentCaseID Abbildungs Referenz</translation>
+                    <description>
+                        <short>
+                            Hier wird die Referenz auf die entsprechende IncidentCaseID angegeben.
+                        </short>
+                    </description>
+                </xs:documentation>
+                <xs:documentation xml:lang="fr">
+                    <translation>Référence IncidentCaseID</translation>
+                    <description>
+                        <short>
+                            La référence à l'IncidentCaseID correspondant est spécifiée ici.
+                        </short>
+                    </description>
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="SubstitutionMappingType">
+        <xs:sequence>
+            <xs:element name="MappedPredecessorDistributorRequestID" type="c:IDType"/>
+            <xs:element name="MappedPredecessorConsumerResponseID" type="c:IDType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProducerSecurityTokensType">
+        <xs:sequence>
+            <xs:element name="Timestamp" type="xs:dateTime" maxOccurs="unbounded"/>
+            <xs:element name="X509Certificate" type="idcc:X509CertificateType"
+                        maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="X509CertificateType">
+        <xs:sequence>
+            <xs:element name="Usage" type="idcc:UsageType"/>
+            <xs:element name="DistinguishedNameOwner" type="xs:string"/>
+            <xs:element name="DistinguishedNameIssuer" type="xs:string"/>
+            <xs:element name="SecuredElement" type="xs:string" maxOccurs="unbounded"/>
+            <xs:element name="PEM" type="xs:base64Binary"/>
+        </xs:sequence>
+        <xs:attribute name="X509CertificateID" type="c:InstanceRefIDType" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="UsageType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Signature"/>
+            <xs:enumeration value="QualifiedSignature"/>
+            <xs:enumeration value="Encryption"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ProducerResponseNotificationsType">
+        <xs:sequence>
+            <xs:element name="Warning" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen, die an den Producer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="c:NotificationsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen, die an den Producer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConsumerNotificationsType">
+        <xs:sequence>
+            <xs:element name="Warning" type="idcc:ConsumerNotificationType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Warnungen, die an den Consumer geschickt werden</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Info" type="idcc:ConsumerNotificationType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Informationen, die an den Consumer zurückgeschickt werden
+                        </translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ConsumerNotificationType">
+        <xs:sequence>
+            <xs:element name="Notification" type="idcc:NotificationType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotificationType">
+        <xs:sequence>
+            <xs:element name="DescriptionCode" type="c:DescriptionCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Code der Beschreibung</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Description" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>Beschreibungstext</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="DeclareIncidentConsumerType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestContext" type="idcc:DistributorRequestContextType">
+                <xs:unique name="X509CertificateID-Key">
+                    <xs:selector xpath="idcc:ProducerSecurityTokens/idcc:X509Certificate"/>
+                    <xs:field xpath="@X509CertificateID"/>
+                </xs:unique>
+                <xs:keyref name="X509CertificateID-Ref" refer="idcc:X509CertificateID-Key">
+                    <xs:selector xpath="idcc:SignatureCertificateUID-BFS"/>
+                    <xs:field xpath="@X509CertificateIDRef"/>
+                </xs:keyref>
+            </xs:element>
+            <xs:element name="DeclareIncident" type="idc:DeclareIncidentRequestType">
+                <xs:unique name="UVG-LAA-Institution-Key">
+                    <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:UVG-LAA"/>
+                    <xs:field xpath="@institutionID"/>
+                </xs:unique>
+                <xs:keyref name="UVG-LAA-Institution-Ref" refer="idcc:UVG-LAA-Institution-Key">
+                    <xs:selector xpath="idc:Job/idc:Addressees/idc:UVG-LAA"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:keyref>
+                <xs:unique name="UVGZ-LAAC-Institution-Key">
+                    <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:UVGZ-LAAC"/>
+                    <xs:field xpath="@institutionID"/>
+                </xs:unique>
+                <xs:keyref name="UVGZ-LAAC-Institution-Ref" refer="idcc:UVGZ-LAAC-Institution-Key">
+                    <xs:selector xpath="idc:Job/idc:Addressees/idc:UVGZ-LAAC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:keyref>
+                <xs:unique name="KU-AC-Institution-Key">
+                    <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:KU-AC"/>
+                    <xs:field xpath="@institutionID"/>
+                </xs:unique>
+                <xs:keyref name="KU-AC-Institution-Ref" refer="idcc:KU-AC-Institution-Key">
+                    <xs:selector xpath="idc:Job/idc:Addressees/idc:KU-AC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:keyref>
+                <xs:unique name="KTG-AMC-Institution-Key">
+                    <xs:selector xpath="idc:IncidentDeclaration/id:Company/id:Institutions/id:KTG-AMC"/>
+                    <xs:field xpath="@institutionID"/>
+                </xs:unique>
+                <xs:keyref name="KTG-AMC-Institution-Ref" refer="idcc:KTG-AMC-Institution-Key">
+                    <xs:selector xpath="idc:Job/idc:Addressees/idc:KTG-AMC"/>
+                    <xs:field xpath="@institutionIDRef"/>
+                </xs:keyref>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeclareIncidentConsumerResponseType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseContext" type="idcc:ConsumerResponseContextType"/>
+            <xs:element name="JobState" type="idcc:JobStateType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="JobStateType">
+        <xs:choice>
+            <xs:element name="UVG-LAA" type="idc:ReducedWorkingStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="UVGZ-LAAC" type="idc:ReducedWorkingStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KU-AC" type="idc:ReducedWorkingStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="KTG-AMC" type="idc:Reduced-KTG-AMC-WorkingStateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>todo</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+
+    <xs:complexType name="SynchronizeIncidentConsumerType">
+        <xs:sequence>
+            <xs:element name="DistributorRequestContext" type="idcc:DistributorRequestContextBaseType"/>
+            <xs:element name="SynchronizeIncident" type="idc:SynchronizeIncidentRequestType">
+                <xs:unique name="IncidentContextID-Ctrl">
+                    <xs:selector xpath="idc:IncidentStories/id:IncidentContext"/>
+                    <xs:field xpath="id:CompanyCaseID"/>
+                    <xs:field xpath="id:InsuranceCaseID"/>
+                    <xs:field xpath="id:IncidentCaseID"/>
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SynchronizeIncidentConsumerResponseType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseContext" type="idcc:ConsumerResponseContextType"/>
+            <xs:element name="SynchronizeIncidentConsumer" type="idc:SynchronizeIncidentConsumerType">
+                <xs:unique name="ConsumerIncidentContextID-Ctrl">
+                    <xs:selector xpath="idc:IncidentStories/id:IncidentContext"/>
+                    <xs:field xpath="id:CompanyCaseID"/>
+                    <xs:field xpath="id:InsuranceCaseID"/>
+                    <xs:field xpath="id:IncidentCaseID"/>
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="VersionMappingFromType">
+        <xs:sequence>
+            <xs:element name="WSDLNamespace" type="xs:anyURI"/>
+            <xs:element name="ServiceTypesNamespace" type="xs:anyURI"/>
+            <xs:element name="IncidentDeclarationMinorVersion" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ConsumerResponseContextType">
+        <xs:sequence>
+            <xs:element name="ConsumerResponseID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AntwortID</translation>
+                        <description>
+                            <short>ID der Antwort</short>
+                        </description>
+                    </xs:documentation>
+                    <xs:documentation xml:lang="fr">
+                        <translation>AntwortID</translation>
+                        <description>
+                            <short>ID de la réponse</short>
+                        </description>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="DistributorRequestID" type="c:IDType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de">
+                        <translation>AuftragsID</translation>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="IncidentDeclarationConsumerFaultType">
+        <xs:sequence>
+            <xs:element name="ConsumerFaultContext" type="idcc:ConsumerResponseContextType"/>
+            <xs:element name="IncidentDeclarationConsumerFault" type="idc:IncidentDeclarationConsumerFaultType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- simple types
+    -->
+</xs:schema>
